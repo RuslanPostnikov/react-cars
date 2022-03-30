@@ -1,0 +1,30 @@
+ nav {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    padding: 10px 20px;
+    background: #8746a8;
+    margin-bottom: 20px;
+    position: fixed;
+    top: 0;
+    z-index: 1;
+    ul {
+        margin: 0;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 20px;
+        list-style: none;
+
+        a {
+            text-decoration: none;
+            color: ghostwhite;
+        }
+    }
+ }
+
+.active {
+  color: blue;
+}
+
