@@ -21,14 +21,14 @@ const Garage = () => {
             try {
                 let fetchedCars = r.data;
                 let newArr = [];
-                Object.keys(fetchedCars).map(id => {
-                    return newArr.push({...fetchedCars[id], id})
+                Object.keys(fetchedCars).map(fireId => {
+                    return newArr.push({...fetchedCars[fireId], fireId})
                 });
                 setCars(newArr);
             } catch (e) {
                 console.log(e);
             }
-                setIsLoaded(true);
+            setIsLoaded(true);
         });
     }, [isLoaded]);
 

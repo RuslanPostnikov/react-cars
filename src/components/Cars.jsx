@@ -22,11 +22,12 @@ const Cars = () => {
         try {
             let response =  await axios.get(URL + arr);
             let newArr = [];
-            response.data.map(car => {
+            response.data.map((car, index) => {
                 return newArr.push({
                     carMake: car.carMake,
                     carModel: car.carModel,
-                    price: +car.price.slice(1, -3)
+                    price: +car.price.slice(1, -3),
+                    id: index
                 })
             })
             setCars(newArr)
@@ -48,10 +49,10 @@ const Cars = () => {
     useEffect(() => fetchCars('/cars.json'), []);
 
 
-    const addToGarage = async (car, index) => {
+    const addToGarage = async car => {
         await axios.get(URL + '/garage.json').then(async r => {
-            if(!r.data || !Object.values(r.data)?.find(el => el.id === index)) {
-                await axios.post(URL + '/garage.json', {id: index, ...car});
+            if(!r.data || !Object.values(r.data)?.find(el => el.id === car.id)) {
+                await axios.post(URL + '/garage.json', car);
                 alert('Car was added to Garage');
             } else {
                 alert('Car is already in Garage');
@@ -139,7 +140,8 @@ const Cars = () => {
                         </div>
                     </form>
                     <ul className={'list-group'}>
-                        {cars.filter(filterByNameCb)
+                        {cars
+                            .filter(filterByNameCb)
                             .filter(filterByPriceCb)
                             .filter(filterByCheckboxCb)
                             .map(mapCarsCb)
